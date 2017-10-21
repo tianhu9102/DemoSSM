@@ -15,7 +15,7 @@
     <!-- 扫描controller（controller层注入）
                               当配置了它后,Spring会自动的到com.mjl.controller
                              下扫描带有@controller @service @component等注解等类,将他们自动实例化 -->  
-   <context:component-scan base-package="cn.thu.controller"/>    
+   <context:component-scan base-package="cn.thu"/>    
        
     <!-- 开启注解  -->
     <mvc:annotation-driven />  

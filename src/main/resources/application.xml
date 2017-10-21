@@ -57,7 +57,17 @@
 		<!-- <property name="typeAliasesPackage" value="com.tiantian.ckeditor.model" 
 			/> -->
 	</bean>
+	
+	<!-- 创建数据映射器-->
+    <bean  class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+          <property name="basePackage" value="cn.thu.dao"/>
+    </bean>
+    
+      <!-- 对数据源进行事务管理 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
-	<!-- 自动扫描注解的bean -->
+	<!-- 自动扫描注解的bean(自动将service层注入) -->
 	<context:component-scan base-package="cn.thu.service" />
 </beans>
