@@ -9,10 +9,9 @@
 </head>
 <body>
 
-登入成功!
+${message}
 <br>
-您好! ${loginuser.userName}
 <br>
-<a href="${pageContext.servletContext.contextPath}/testSSM/login.jsp">返回</a>
+
 </body>
 </html>

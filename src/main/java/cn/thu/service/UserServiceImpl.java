@@ -26,4 +26,8 @@ public class UserServiceImpl implements UserService{
 		return false;
 	}
 
+	public User register(String userName, String userPassword, String email) {
+		return userDao.insertUser(userName, userPassword, email);
+	}
+
 }

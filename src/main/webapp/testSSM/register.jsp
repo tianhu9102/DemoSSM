@@ -11,24 +11,25 @@
 <br>
 <br>
 <br>
-<form name="formLogin" action="${pageContext.servletContext.contextPath}/user/login" method="post">
+<form name="formLogin" action="${pageContext.servletContext.contextPath}/user/rgister" method="post">
 	<table width="400" border="1" align="center">
-		<tr>
-			<td colspan="2"> 登录窗口</td>
-		</tr>
+	
 		<tr>
 			<td>用户名：</td>
 			<td><input type="text" name="userName"> </td>
 		</tr>
 		<tr>
 			<td>密码：</td>
-			<td><input type="password" name="userPassword"> </td>
+			<td><input type="text" name="userPassword"> </td>
+		</tr>
+		<tr>
+			<td>邮箱：</td>
+			<td><input type="text" name="userEmail"> </td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<input type="submit" name="submit" value="登录"/>
-				<input type="reset" name="reset" value="重置"/>
-				<a href="${pageContext.servletContext.contextPath}/testSSM/register.jsp">注册</a>
+				<input type="submit" name="submit" value="提交"/>
+				<input type="reset" name="reset" value="重填"/>
 			</td>
 		</tr>
 		

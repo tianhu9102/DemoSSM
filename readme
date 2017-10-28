@@ -1,0 +1,4 @@
+框架：SpringMVC、Spring、MyBatis；数据库：MySQL
+
+实现功能：
+1.注册、登录功能（拟在后期添加注册验证与邮箱激活状态）

@@ -16,6 +16,8 @@
 	<select id="selectUserByName" parameterType="string" resultMap="BaseResultMap">
 		SELECT * FROM t_user WHERE USER_NAME = #{userName}
 	</select>
-	
+	<select id="insertUser" parameterType="map" resultMap="BaseResultMap">
+		INSERT INTO t_user ( USER_NAME, USER_PASSWORD, USER_EMAIL) VALUES (#{userName},#{userPassword},#{userEmail})  
+	</select>
 </mapper>
 

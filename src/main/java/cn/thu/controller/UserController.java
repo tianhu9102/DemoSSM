@@ -43,5 +43,12 @@ public class UserController {
 			return "error";
 		}
     }
+    
+    @RequestMapping("/rgister")
+    public String register(User user,HttpServletRequest request){
+    	userService.register(user.getUserName(), user.getUserPassword(),user.getUserEmail());
+		request.setAttribute("message", "成功注册！欢迎您"+user.getUserName());
+		return "tmpOK";
+    }
 
 }  
