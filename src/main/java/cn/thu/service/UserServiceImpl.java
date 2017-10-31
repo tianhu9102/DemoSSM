@@ -1,5 +1,10 @@
 package cn.thu.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +33,12 @@ public class UserServiceImpl implements UserService{
 
 	public User register(String userName, String userPassword, String email) {
 		return userDao.insertUser(userName, userPassword, email);
+	}
+
+	public List<User> findAllUsers() {
+		List<User> lists = userDao.findAllUsers();
+		
+		return lists;
 	}
 
 }

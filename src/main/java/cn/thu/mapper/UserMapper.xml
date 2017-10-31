@@ -19,5 +19,9 @@
 	<select id="insertUser" parameterType="map" resultMap="BaseResultMap">
 		INSERT INTO t_user ( USER_NAME, USER_PASSWORD, USER_EMAIL) VALUES (#{userName},#{userPassword},#{userEmail})  
 	</select>
+	<select id="findAllUsers" resultMap="BaseResultMap" >
+		select USER_NAME, USER_PASSWORD, USER_EMAIL from t_user;
+	</select>
+	
 </mapper>
 
