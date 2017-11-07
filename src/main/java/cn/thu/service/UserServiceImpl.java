@@ -41,4 +41,12 @@ public class UserServiceImpl implements UserService{
 		return lists;
 	}
 
+	public int updateUser(User user) {
+		return userDao.updateUser(user);
+	}
+
+	public int deleteUser(Integer userId) {
+		return userDao.deleteUser(userId);
+	}
+
 }

@@ -1,6 +1,10 @@
-妗嗘灦锛歋pringMVC銆丼pring銆丮yBatis锛涙暟鎹簱锛歁ySQL
+框架：SpringMVC+Spring+MyBatis+MySQL
 
-瀹炵幇鍔熻兘锛�
-1.娉ㄥ唽銆佺櫥褰曞姛鑳斤紙鎷熷湪鍚庢湡娣诲姞娉ㄥ唽楠岃瘉涓庨偖绠辨縺娲荤姸鎬侊級
-
+参考：
 http://www.cnblogs.com/yiye/p/5969157.html
+
+一、@ResponseBody用法
+使用场合：返回的数据不是html标签的页面，而是某种格式的数据（如json、xml）时;
+作       用：  该注解用于将Controller的方法返回的对象，根据HTTP Request Header的Accept的内容,
+                     通过适当的HttpMessageConverter转换为指定格式后，写入到Response对象的body数据区。
+注      意：    使用时需要开启注解，添加xml、json包依赖

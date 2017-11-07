@@ -124,7 +124,7 @@
             <version>5.1.29</version>  
         </dependency>  
         
-        <!-- 使用Json所依赖的jar包 -->  
+        <!-- 返回JSON和XML数据的依赖包 -->  
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>

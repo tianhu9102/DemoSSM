@@ -2,6 +2,9 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"    
 "http://mybatis.org/dtd/mybatis-3-config.dtd">    
 <configuration>      
-
+    <!-- 别名 -->  
+    <typeAliases>  
+      <typeAlias type="cn.thu.bean.User" alias="User"/>  
+    </typeAliases>
 
 </configuration> 

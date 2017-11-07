@@ -6,14 +6,16 @@
 <title>御品香</title>
 </head>
 <body>
-<h2>用户名集合：</h2>
+<h2>前后端交互传参：</h2>
 <br>
 <br>
 <script type="text/javascript" src="${pageContext.servletContext.contextPath}/jslib/jquery/jquery-1.8.3-min.js"></script>
     
     <script type="text/javascript">
-      $(document).ready(function() {
-    	  $.ajax({
+    
+    $(document).ready(function() {
+    	 
+    /* 	$.ajax({
               type:"GET",
               url:"${pageContext.servletContext.contextPath}/user/findUserById",
               dataType:"json",
@@ -21,12 +23,42 @@
               data:{"userId":"66"},
               
               success:function(mapResult){
-                  alert('欢迎你，'+mapResult.username);
+                  alert('欢迎你，'+mapResult.User.userName+"、"+mapResult.User.userEmail);
               },
               error:function(){
                   alert("方法执行不成功!");
               }  
-      	})
+      	})  */
+      	
+      	
+/*    	$.ajax({
+        type:"GET",
+        url:"${pageContext.servletContext.contextPath}/user/queryUserDataSets",
+        contentType:"application/json;charset=UTF-8",
+        
+        success:function(mapResult){
+            alert('用户列表，'+mapResult.userList);
+        },
+        error:function(){
+            alert("方法执行不成功!");
+        }  
+	})  
+      	 */
+      	 
+     	$.ajax({
+            type:"GET",
+            url:"${pageContext.servletContext.contextPath}/user/findUserById",
+            dataType:"json",
+            contentType:"application/json;charset=UTF-8",
+            data:{"userId":"66"},
+            
+            success:function(mapResult){
+                alert('欢迎你，'+mapResult.User.userName+"、"+mapResult.User.userEmail);
+            },
+            error:function(){
+                alert("方法执行不成功!");
+            }  
+    	})
       	
       });
 

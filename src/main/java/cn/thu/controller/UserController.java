@@ -1,5 +1,6 @@
 package cn.thu.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,14 +61,43 @@ public class UserController {
     @RequestMapping("/findUserById")
     @ResponseBody
     public Map<String,Object> findUserById(@RequestParam Map<String, Object> map){
-    	Integer id =   Integer.valueOf( (String) map.get("userId") );
+    	Integer id = Integer.valueOf( (String) map.get("userId") );
     	
     	User user = userService.selectUserById(id);
  	
          Map<String,Object> mapResult = new HashMap<String,Object>();
-         mapResult.put("username", user.getUserName());
-         System.out.print("kkk:::"+user.getUserName());
+         mapResult.put("User", user);
+         System.out.println("返回用户:"+user);
          return mapResult;
     }
+    
+    @RequestMapping("/queryUserDataSets")
+    @ResponseBody
+    public Map<String,Object> queryAllUsers(){
+    	List<User> lists = userService.findAllUsers();
+    	for(int i=0;i<lists.size();i++){
+    		System.out.println(lists.get(i).getUserName());
+    	}
+    	Map<String,Object> resultMap = new HashMap<String, Object>();
+    	resultMap.put("userList", lists);
+    	return resultMap;
+    }
+    
+    @RequestMapping("/updateUser")
+    public int updateUser(User user) {
+    	System.out.println("kkk:::"+user);
+    	
+		return userService.updateUser(user);
+	}
+    
+    @RequestMapping("/deleteUser")
+	public int deleteUser(Integer userId) {
+    	
+    	int tmp = userService.deleteUser(userId);
+    	
+    	System.out.println("kkk:::"+userId+", "+tmp);
+    	
+		return tmp;
+	}
 
 }  
