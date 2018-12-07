@@ -13,60 +13,47 @@ public class TestN
 
     public static void main(String[] args)
     {
-        Point p0 = new Point();
-        p0.setX(4.5);
-        p0.setY(4.5);
-        p0.setZ(4.5);
 
-        List<Point> lstPointsView1 = new ArrayList<Point>();
-        Point p1 = new Point();
-        p1.setX(7.5);
-        p1.setY(34.5);
-        p1.setZ(2.5);
-
-        Point p2 = new Point();
-        p1.setX(3.5);
-        p1.setY(4.5);
-        p1.setZ(3.5);
-
-        Point p3 = new Point();
-        p1.setX(103.5);
-        p1.setY(118.5);
-        p1.setZ(53.5);
-        lstPointsView1.add(p3);
-        lstPointsView1.add(p2);
-        lstPointsView1.add(p1);
-
-        Point nearest = findNearestPoint(p0, lstPointsView1);
-        System.out.println(nearest.getX());
     }
 
-    // 返回三个视图中最近点的列表
+    // 返回三个视图中互相最近点的列表
     public List<List<Point>> compute(List<Point> lstPoints_Red, List<Point> lstPoints_Dark, List<Point> lstPoints_Green)
     {
-        List<List<Point>> llsist = new ArrayList<List<Point>>();
+        // 1.计算红黑点云互相最近点的列表
+        List<List<Point>> computeMupullyRD = computeMupully(lstPoints_Red, lstPoints_Dark);
 
-        for (int i = 0; i < lstPoints_Red.size(); i++)
+        // 2.计算红绿点云互相最近点的列表
+        List<List<Point>> computeMupullyRG = computeMupully(lstPoints_Red, lstPoints_Green);
+
+        // 3.计算黑绿点云互相最近点的列表
+        List<List<Point>> computeMupullyDG = computeMupully(lstPoints_Dark, lstPoints_Green);
+
+        return null;
+    }
+
+    public static List<List<Point>> computeMupully(List<Point> lstPoints0, List<Point> lstPoints1)
+    {
+
+        List<List<Point>> data = new ArrayList<List<Point>>();
+        for (int i = 0; i < lstPoints0.size(); i++)
         {
-            // 红色点中的第i个点：pointView0
-            Point pointView0 = lstPoints_Red.get(i);
+            List<Point> lstMupully = new ArrayList<Point>();
 
-            // 黑色点中距离pointView0最近的点：pointView1，两者构成一组数据
-            Point pointView1 = findNearestPoint(pointView0, lstPoints_Dark);
+            Point pointView0 = lstPoints0.get(i);
 
-            // 绿色点中距离pointView0、pointView1最近的点，三者构成一组数据
-            Point pointView2 = findNearestPoint(pointView0, lstPoints_Green);
+            Point pointView1 = findNearestPoint(pointView0, lstPoints1);
+            Point pointView0_mirror = findNearestPoint(pointView1, lstPoints1);
 
-            // 红色点中第i个点、及其距离最近的黑色、绿色点，三者构成一组数据
-            List<Point> lstpointV012 = new ArrayList<Point>();
-            lstpointV012.add(pointView0);
-            lstpointV012.add(pointView1);
-            lstpointV012.add(pointView2);
+            // 互相最近
+            lstMupully.add(pointView0);
+            if (pointView0_mirror == pointView0)
+            {
+                lstMupully.add(pointView1);
+            }
 
-            llsist.add(lstpointV012);
+            data.add(lstMupully);
         }
-
-        return llsist;
+        return data;
     }
 
     // 给定一个点，得到另一个view里最近的点
@@ -84,7 +71,8 @@ public class TestN
             double z = lstPointsView1.get(i).getZ();
 
             // 计算距离的平方
-            double length = Math.sqrt(Math.abs(vx - x)) + Math.sqrt(Math.abs(vy - y)) + Math.sqrt(Math.abs(vz - z));
+            double length = Math.sqrt(Math.pow(Math.abs(vx - x), 2) + Math.pow(Math.abs(vy - y), 2)
+                            + Math.pow(Math.abs(vz - z), 2));
 
             map.put(lstPointsView1.get(i), length);
         }
@@ -94,28 +82,29 @@ public class TestN
         List<Double> lstdouble = new ArrayList<Double>(valueCollection);
         Collections.sort(lstdouble);
 
-        double nearestLength = lstdouble.get(0);
+        Double nearestLength = lstdouble.get(0);
 
-        Point neartPoint = (Point) getKey(map, nearestLength);
+        List<Point> neartPoint = getKeyList(map, nearestLength);
 
-        return neartPoint;
+        return neartPoint.get(0);
     }
 
-    public static Object getKey(Map map, Object value)
+    // 根据value值获取到对应的所有的key值
+    public static List<Point> getKeyList(Map<Point, Double> map, Double value)
     {
-        List<Object> keyList = new ArrayList<Object>();
-        for (Object key : map.keySet())
+        List<Point> keyList = new ArrayList();
+        for (Point getKey : map.keySet())
         {
-            if (map.get(key).equals(value))
+            if (map.get(getKey).equals(value))
             {
-                keyList.add(key);
+                keyList.add(getKey);
             }
         }
         return keyList;
     }
 
-    // 构造模拟数据： 点云（红色）、点云（绿色）、点云（黑色）
-    public static List<Point> createDatas()
+    // 测试1：构造模拟数据： 点云（红色）、点云（绿色）、点云（黑色）
+    public static List<Point> testDatas()
     {
         List<Point> lstPoints_Red = new ArrayList<Point>();
 
@@ -135,6 +124,36 @@ public class TestN
         }
 
         return lstPoints_Red;
+    }
+
+    public static void testNearestPoint()
+    {
+        Point p0 = new Point();
+        p0.setX(4);
+        p0.setY(4);
+        p0.setZ(4);
+
+        List<Point> lstPointsView1 = new ArrayList<Point>();
+        Point p1 = new Point();
+        p1.setX(24);
+        p1.setY(24);
+        p1.setZ(24);
+
+        Point p2 = new Point();
+        p2.setX(-56);
+        p2.setY(-16);
+        p2.setZ(-16);
+
+        Point p3 = new Point();
+        p3.setX(104);
+        p3.setY(14);
+        p3.setZ(14);
+        lstPointsView1.add(p3);
+        lstPointsView1.add(p2);
+        lstPointsView1.add(p1);
+
+        Point nearest = findNearestPoint(p0, lstPointsView1);
+        System.out.println("距离p0最近的点X为：" + nearest.getX());
     }
 
 }
