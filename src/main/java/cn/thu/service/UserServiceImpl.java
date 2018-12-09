@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.thu.bean.User;
 import cn.thu.dao.UserDao;
@@ -31,8 +32,15 @@ public class UserServiceImpl implements UserService{
 		return false;
 	}
 
-	public User register(String userName, String userPassword, String email) {
-		return userDao.insertUser(userName, userPassword, email);
+	@Transactional
+	public Integer  register(String userName, String userPassword, String email) {
+		Integer  temp  = userDao.insertUser(userName, userPassword, email);
+		if(temp==null){
+			System.out.println("not insert user ...");
+		}else{
+			System.out.println("insert user ..."+ temp);
+		}
+		return temp;
 	}
 
 	public List<User> findAllUsers() {
@@ -41,11 +49,12 @@ public class UserServiceImpl implements UserService{
 		return lists;
 	}
 
-	public int updateUser(User user) {
+	public boolean updateUser(User user) {
 		return userDao.updateUser(user);
 	}
 
-	public int deleteUser(Integer userId) {
+	@Transactional
+	public Integer deleteUser(Integer userId) {
 		return userDao.deleteUser(userId);
 	}
 

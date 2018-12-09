@@ -13,20 +13,23 @@
     http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">  
        
     <!-- 扫描controller（controller层注入）
-                              当配置了它后,Spring会自动的到com.mjl.controller
+                              当配置了它后,Spring会自动的到cn.thu
                              下扫描带有@controller @service @component等注解等类,将他们自动实例化 -->  
-   <context:component-scan base-package="cn.thu"/>    
+   <context:component-scan base-package="cn.thu"/>  
        
     <!-- 开启注解  -->
     <mvc:annotation-driven />  
       
     <!-- 静态资源访问（不拦截此目录下的东西的访问） -->
+    <mvc:resources location="/css/"  mapping="/css/**" /> 
     <mvc:resources location="/jslib/img/"  mapping="/jslib/img/**" /> 
     <mvc:resources location="/jslib/bootstrap/"  mapping="/jslib/bootstrap/**" /> 
     <mvc:resources location="/jslib/bootstrap_table/"  mapping="/jslib/bootstrap_table/**" /> 
     <mvc:resources location="/jslib/echart/"  mapping="/jslib/echart/**" /> 
     <mvc:resources location="/jslib/jquery/"  mapping="/jslib/jquery/**" /> 
     <mvc:resources location="/jslib/Cesium/"  mapping="/jslib/Cesium/**" /> 
+    <mvc:resources location="/jslib/qt/"  mapping="/jslib/qt/**" />
+    <mvc:resources location="/jslib/vue/"  mapping="/jslib/vue/**" /> 
        
    <!-- 对模型视图添加前后缀 -->  
      <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

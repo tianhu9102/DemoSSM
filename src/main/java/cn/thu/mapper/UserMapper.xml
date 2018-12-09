@@ -17,31 +17,32 @@
 	
 	<!-- 查询用户列表 -->
 	<select id="findAllUsers" resultMap="BaseResultMap" >
-		select USER_NAME, USER_PASSWORD, USER_EMAIL from t_user;
+		select USER_ID, USER_NAME, USER_PASSWORD, USER_EMAIL from t_user;
 	</select>
 	
 	<!-- 更新用户信息 -->
 	<select id="updateUser" parameterType="User" >
 		update t_user
-		<set>
+		set
 			USER_NAME = #{userName},
 			USER_PASSWORD = #{userPassword},
 			USER_EMAIL = #{userEmail}
-		</set>
 		<where>
 			USER_ID = #{userId}
 		</where>
 	</select>
 	
 	<!-- 删除用户信息 -->
-	<select id="deleteUser" parameterType="int" >
+<!-- 	<select id="deleteUser" parameterType="int"> -->
+	<select id="deleteUser" parameterType="Integer">
 		 delete FROM t_user WHERE USER_ID = #{userId} 
 	</select>
 	
 	<select id="selectUserByName" parameterType="string" resultMap="BaseResultMap">
 		SELECT * FROM t_user WHERE USER_NAME = #{userName}
 	</select>
-	<select id="insertUser" parameterType="map" resultMap="BaseResultMap">
+	
+	<select id="insertUser" parameterType="map">  <!-- resultMap="BaseResultMap" -->
 		INSERT INTO t_user ( USER_NAME, USER_PASSWORD, USER_EMAIL) VALUES (#{userName},#{userPassword},#{userEmail})  
 	</select>
 	

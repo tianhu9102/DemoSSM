@@ -6,5 +6,8 @@
     <typeAliases>  
       <typeAlias type="cn.thu.bean.User" alias="User"/>  
     </typeAliases>
-
+    
+<!-- 	<mappers>  
+        <mapper resource="cn/thu/mapper/UserMapper.xml" />  
+    </mappers>  --> 
 </configuration> 

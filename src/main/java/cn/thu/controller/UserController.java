@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.thu.bean.User;
-import cn.thu.service.UserService;  
+import cn.thu.service.UserService;
+import cn.thu.util.SymmetricEncoder;  
   
 /** 
  * 功能概要: UserController 
  *  
- * @author linbingwen 
- * @since  2015年9月28日
+ * @author tianhu
+ * @since  2017年11月20日
  */  
 @Controller  
 @RequestMapping("/user")
@@ -41,7 +42,11 @@ public class UserController {
     
     @RequestMapping("/login")
     public String login(User user,HttpServletRequest request){
-    	boolean loginType = userService.login(user.getUserName(), user.getUserPassword());
+    	
+    	SymmetricEncoder symEndoer = new SymmetricEncoder();
+    	String password = symEndoer.AESEncode("6825", user.getUserPassword());
+    	System.out.println("6666 "+password);
+    	boolean loginType = userService.login(user.getUserName(),password);
     	if (loginType) {
 			request.setAttribute("loginuser", user);
 			return "success";
@@ -52,19 +57,28 @@ public class UserController {
     }
     
     @RequestMapping("/rgister")
-    public String register(User user,HttpServletRequest request){
-    	userService.register(user.getUserName(), user.getUserPassword(),user.getUserEmail());
-		request.setAttribute("message", "成功注册！欢迎您"+user.getUserName());
+    public String register(HttpServletRequest request){
+    	if(request.getParameter("userName")!="" &&
+    	   request.getParameter("userPassword")!="" &&
+    	   request.getParameter("userEmail")!=""){
+    		
+    		SymmetricEncoder symEndoer = new SymmetricEncoder();
+    		String password = symEndoer.AESEncode("6825", request.getParameter("userPassword"));
+    		
+    		System.out.println("password???   "+password);
+    		userService.register(request.getParameter("userName"), password,request.getParameter("userEmail"));
+    		request.setAttribute("message", "成功注册！欢迎您"+request.getParameter("userName"));
+    	}else{
+    		request.setAttribute("message", "注册失败！姓名、密码、邮箱不能为空！");
+    	}
 		return "tmpOK";
     }
     
     @RequestMapping("/findUserById")
     @ResponseBody
     public Map<String,Object> findUserById(@RequestParam Map<String, Object> map){
-    	Integer id = Integer.valueOf( (String) map.get("userId") );
-    	
-    	User user = userService.selectUserById(id);
- 	
+    	 Integer id = Integer.valueOf( (String) map.get("userId") );
+    	 User user = userService.selectUserById(id);
          Map<String,Object> mapResult = new HashMap<String,Object>();
          mapResult.put("User", user);
          System.out.println("返回用户:"+user);
@@ -73,29 +87,61 @@ public class UserController {
     
     @RequestMapping("/queryUserDataSets")
     @ResponseBody
-    public Map<String,Object> queryAllUsers(){
+    public ModelAndView queryAllUsers(@RequestParam Map<String,Object> map){
+    	ModelAndView mav = new ModelAndView();  
+    	mav.setViewName("getAllUsers");
+    	mav.addObject("message", "用户列表--List实现形式");
+    	
     	List<User> lists = userService.findAllUsers();
     	for(int i=0;i<lists.size();i++){
     		System.out.println(lists.get(i).getUserName());
     	}
-    	Map<String,Object> resultMap = new HashMap<String, Object>();
-    	resultMap.put("userList", lists);
-    	return resultMap;
+        mav.addObject("userlists", lists);   
+    	return mav; //getAllUsers.jsp
+    }
+    
+    @RequestMapping("/queryUserDataSets1")
+    @ResponseBody
+    public ModelAndView queryAllUsers1(@RequestParam Map<String,Object> map){
+    	ModelAndView mav = new ModelAndView();  
+    	mav.setViewName("getAllUsers1");
+    	mav.addObject("message", "用户列表1--Map实现形式");
+    	
+    	List<User> lists = userService.findAllUsers();
+    	for(int i=0;i<lists.size();i++){
+    		System.out.println(lists.get(i).getUserName());
+    		map.put(String.valueOf(i), lists.get(i));
+    	}
+    	mav.addObject("mapping", map);
+    	return mav; //getAllUsers1.jsp
+    }
+    
+    @RequestMapping("/queryUserDataSets2")
+    @ResponseBody
+    public List<User> queryAllUsers2(@RequestParam Map<String,Object> map){
+    	
+    	List<User> lists = userService.findAllUsers();
+    	return lists; //getAllUsers1.jsp	
     }
     
     @RequestMapping("/updateUser")
-    public int updateUser(User user) {
+    public boolean updateUser(User user) {
     	System.out.println("kkk:::"+user);
     	
 		return userService.updateUser(user);
 	}
     
     @RequestMapping("/deleteUser")
-	public int deleteUser(Integer userId) {
+    @ResponseBody
+	public Integer deleteUser(@RequestParam(value="id") Integer userId) {
+    	System.out.println("userId: "+userId);
+    	Integer tmp = userService.deleteUser(userId);
     	
-    	int tmp = userService.deleteUser(userId);
-    	
-    	System.out.println("kkk:::"+userId+", "+tmp);
+    	if(null==tmp){
+    		System.out.println("delete not ok....");
+    	}else{
+    		System.out.println("delete ok...."+tmp);
+    	}
     	
 		return tmp;
 	}

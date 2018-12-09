@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>御品香</title>
+<title>DemoSSM</title>
 </head>
 <body>
 
@@ -21,6 +21,10 @@
 		<tr>
 			<td>密码：</td>
 			<td><input type="text" name="userPassword"> </td>
+		</tr>
+		<tr>
+			<td>确认密码：</td>
+			<td><input type="text" name="userPasswordConfirm"> </td>
 		</tr>
 		<tr>
 			<td>邮箱：</td>

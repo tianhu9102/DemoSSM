@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/main/java/cn/thu/controller/UserController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/errorpage/404.jsp=UTF-8
+encoding//src/main/webapp/testSSM/commfooter.jsp=UTF-8
+encoding//src/main/webapp/testSSM/getAllUsers2.jsp=UTF-8
+encoding//src/main/webapp/testSSM/login.jsp=UTF-8
+encoding//src/main/webapp/testSSM/testLesWebViewPage.jsp=UTF-8
 encoding/readme=UTF-8

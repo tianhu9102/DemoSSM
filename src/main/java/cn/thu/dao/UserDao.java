@@ -14,13 +14,13 @@ public interface UserDao {
 	public List<User> findAllUsers();
 	
 	//更新客户信息
-	int updateUser(User user);
+	boolean updateUser(User user);
 	
 	//删除客户信息
-	int deleteUser(Integer userId);
+	Integer  deleteUser( int userId);
 	
 	public User selectUserByName(String userName);
-	public User insertUser(@Param("userName")String userName,@Param("userPassword")String userPassword,@Param("userEmail")String userEmail);
 	
-
+	public Integer insertUser(@Param("userName")String userName,@Param("userPassword")String userPassword,@Param("userEmail")String userEmail);
+	
 }

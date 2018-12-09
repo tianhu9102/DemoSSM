@@ -1,0 +1,16 @@
+#footer{
+	background:gray;
+	width:100%;
+	margin:0 auto;
+}
+
+.i-b{
+	height:60px;
+
+}
+
+.g-flex li{ 
+	display:inline-block;
+	float:right;
+	height:40px;
+}

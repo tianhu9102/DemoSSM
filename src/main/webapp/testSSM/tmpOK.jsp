@@ -5,7 +5,7 @@
 %>
 <html>
 <head>
-    <title>御品香</title>
+    <title>DemoSSM</title>
 </head>
 <body>
 
