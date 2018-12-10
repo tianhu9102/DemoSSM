@@ -49,7 +49,7 @@ public class TestN
                     Point pointInView3_mirror_View2 = existIn(pointInView3, mupullyList2);
                     if (null != pointInView3_mirror_View2)
                     {
-                        if (pointsEquals(pointInView3_mirror_View2, pointInView3))
+                        if (pointsEquals(pointInView3_mirror_View2, pointInView2))
                         {
                             List<Point> lstMupullyPoints = new ArrayList<Point>();
                             lstMupullyPoints.add(pointInView1);
