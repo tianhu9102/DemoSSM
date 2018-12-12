@@ -1,0 +1,152 @@
+
+	html,
+	body{
+		margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+	}
+	
+	
+   ul{
+		list-style:none;
+	}
+	
+	.container{
+		width:100%;
+		height:100%;
+		margin:0 auto;
+	}
+	.box{
+		width:100%;
+		height:100%;
+		text-align: center;
+	}
+	.header{
+		width:100%;
+		height:5%;
+		background:white;
+	}
+	.content{
+		position:relative;
+		width:100%;	
+		height:100%;	
+		margin:0 auto;
+	}
+	 .content_body{
+        position: relative;
+        width:100%;	
+        /* background: olive;  */ 
+        height:95%;         
+     }
+     .content_left{
+        background: #1C1C1C; 
+        width:100%;	
+        opacity:0.9;
+        height:100%;     
+        width:6%;  
+        float:left;  
+     }
+     .content_middle{    	 
+    	 background: #2E2E2E;
+         height:100%;         
+         width:14%; 
+         float:left;
+     }
+     .content_right{
+        background: #0B173B;
+        background: linear-gradient(-90deg, #210B61 0%, #170B3B 100%);
+         /*#0B173B  #170B3B   紫色：#210B61*/
+        opacity:0.8;   /* 设置透明度 */
+        height:100%;    
+        width:80%;   
+        float:left;    
+     }
+     
+     
+     ul.imglist{
+		margin:0 auto;
+		width:100%;
+		padding-left:5px;
+		padding-top:30px;
+	}
+	
+	ul.imglist li{
+		float:left;
+		padding:14px 8px;
+		display:block;
+		text-align:center;		
+		color:white;
+	}	
+     ul.imglist li a{
+		text-decoration:none;
+		font-size:16px;
+		color:white;
+	}	
+	ul.imglist li a:hover{
+		text-decoration:none;
+		font-size:16px;
+		color:green;
+	}
+	
+/* 	ul.imglist li span{
+		font-size:20px;
+		display:block;
+		float:left;
+	} */
+	
+	
+	ul.infolist{
+		margin:0 auto;
+		width:100%;
+		padding-left:0px;
+		padding-top:80px;
+	}
+	
+	ul.infolist li{
+		font-size:20px;
+		color:gray;
+		text-align:center;
+		margin-top:20px;
+	}
+	
+	ul.tfolist{
+		margin:0 auto;
+		width:100%;
+		padding-left:0px;
+		padding-top:80px;
+	}
+	
+	ul.tfolist li{
+		font-size:20px;
+		color:gray;
+		text-align:center;
+		margin-top:20px;
+	}
+     
+    .pass1{
+    	width:60%;
+    	height:50%;
+    	background:olive;
+    	float:left;
+    }
+    .pass2{
+    	width:40%;
+    	height:50%;
+    	background:green;
+    	float:left;
+    }
+    .pass3{
+    	width:60%;
+    	height:50%;
+    	background:light;
+    	float:left;
+    }
+    .pass4{
+    	width:40%;
+    	height:50%;
+    	background:#210B61;
+    	float:left;
+    }
+
+	
